@@ -1,0 +1,67 @@
+# ================================== MENU CONFIGURATION SYNTAX GUIDE ==================================
+# 
+# 1. Hierarchy:
+#    - Use `>` at line end to create submenu
+#    - Indent with 4 spaces per level (use the `TAB` key)
+#    - Lines containing only `-` characters create separator lines
+# 
+# 2. Item Format:
+#    [TYPE] : [DISPLAY NAME IN LIVE BROWSER]
+#    - TYPE prefixes (case-sensitive):
+#          S = Stock (Ableton built-in)
+#          R = Rack
+#          P = Preset
+#          M = Max Device
+#          2 = VST2 Plugin
+#          3 = VST3 Plugin
+#          C = Category Label (non-clickable)
+#
+#    - If search results aren't in the expected order (e.g. "Limiter" appears after "Color Limiter"),
+#      add a number after the type letter to specify the position. Examples:
+#          S2 = 2nd Stock result
+#          R5 = 5th Rack result
+#      Note: Doesn't apply to VST2/3. If a VST search acts up, try sandwiching the manufacturer name before the plugin name.
+# 
+# 3. Special Rules:
+#    - Lines starting with `#` are comments
+#    - Empty lines will be ignored
+# 
+# =====================================================================================================
+
+# Examples:
+
+
+S : Utility
+--
+? : [ADD ITEM HERE]
+----
+EQ >
+    C : [CATEGORY]
+    S : EQ Eight
+    3 : Fabfilter Pro-Q 3
+    ? : [ADD ITEM HERE]
+    C : -- Filter --
+    S : Auto Filter
+    3 : kHs Formant Filter
+
+Compressor >
+    2 : MCompressor
+    3 : Fabfilter Pro-C 2
+    C : -- Multiband --
+    P : OTT
+    3 : Fabfilter Pro-MB
+    -------
+    Analog >
+        3 : Gem Comp76
+        3 : API-2500 Stereo
+
+[SUBMENU] >
+    [ALSO SUBMENU] >
+        [STILL SUBMENU] >
+            [EVEN SUBMENU] >
+                [SPACE] >
+                    [ORBIT] >
+                        [GALAXY] >
+                            [NEBULA] >
+                                [BLACK HOLE] >
+                                    ??? : [SINGULARITY...]
