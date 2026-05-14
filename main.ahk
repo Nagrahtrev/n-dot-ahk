@@ -38,13 +38,13 @@ IsAbletonActive(*) {
         activeHwnd := WinActive("A")
         if !activeHwnd
             return false
-            
+
         clsName := WinGetClass(activeHwnd)
         exeName := WinGetProcessName(activeHwnd)
-        
+
         if (clsName = "Ableton Live Window Class")
             return true
-            
+
         if RegExMatch(exeName, "i)^Ableton Live.*\.exe$")
             return true
     }
@@ -69,13 +69,13 @@ if (AutoEnglishIme) {
 
 CheckAbletonFocus(*) {
     static wasAbletonActive := false
-    
+
     enIME := 0x4090409
     defaultIME := 0x8040804
-    
+
     try {
         isAbleton := IsAbletonActive()
-        
+
         if (isAbleton && !wasAbletonActive) {
             PostMessage(0x50, 0, enIME, , "A")
             wasAbletonActive := true
@@ -108,12 +108,12 @@ CreateMenuFromFile(configText) {
 
         if (indent > currentLevel + 1)
             Throw Error("Invalid indentation level at line " A_Index " (Current Level: " currentLevel ", Target Level: " indent ")")
-        
+
         while (indent < currentLevel) {
             menuStack.Pop()
             currentLevel--
         }
-        
+
         if RegExMatch(line, "^-+$") {
             menuStack[-1].Add()
             continue
@@ -129,7 +129,7 @@ CreateMenuFromFile(configText) {
             currentLevel++
             continue
         }
-        
+
         if RegExMatch(line, "(.*):(.*)", &match) {
             handler := Trim(match[1])
             name := Trim(match[2])
@@ -144,7 +144,7 @@ CreateMenuFromFile(configText) {
             menuStack[-1].SetIcon(name, "Shell32.dll", 44)
             continue
         }
-        
+
         if (isSubmenu) {
             ;; Done
         } else if (handler = "C") {
@@ -183,19 +183,19 @@ MenuHandler(handler, name, *) {
 }
 
 genericLoader(itemName, prefix := "", dnCount := 1, needWinCheck := false) {
-    Sleep 150 
+    Sleep 150
     Send "^f"
     Sleep 100
 
     fullSearch := (prefix != "" && InStr(prefix, '""')) ? StrReplace(prefix, '""', '"' itemName '"') : (prefix != "" ? prefix " " itemName : itemName)
 
     SendText fullSearch
-    Sleep 800    
+    Sleep 800
     Send "{Down}"
 
     Sleep 300
     Send "{Home}"
-    
+
     Sleep 100
 
     Loop (dnCount - 1) {
@@ -222,14 +222,14 @@ eg(*) {
 
 omgitis(*) {
     static targetText := ""
-    
+
     ChangeButton() {
         if WinExist("ahk_class #32770 ahk_pid " ProcessExist()) {
             SetTimer ChangeButton, 0
             ControlSetText targetText, "Button1"
         }
     }
-    
+
     CustomPop(msg, btnText) {
         targetText := btnText
         SetTimer ChangeButton, 10
@@ -239,12 +239,12 @@ omgitis(*) {
     CustomPop("EXCUSE ME!", "YES?")
     CustomPop("IS THIS YOUR HANDBAG?", "PARDON?")
     CustomPop("IS THIS YOUR HANDBAG?", "YES, IT IS.")
-    
+
     sankyu := "听我说谢谢你，因为有你，温暖了四季`n"
            . "谢谢你，感谢有你，世界更美丽`n"
            . "我要谢谢你，因为有你，爱常在心底`n"
            . "谢谢你，感谢有你，把幸福传递 :)"
-           
+
     CustomPop(sankyu, "谢谢你")
 }
 
@@ -322,7 +322,7 @@ MyFuncOpenPreferences(*) {
 MyFuncLocateSidebarLabel(*) {
     MouseClick , Xpos, Ypos, , 0
     Sleep 10
-    Send "{Right}" 
+    Send "{Right}"
 }
 
 MyFuncMidiNoteUp(*) {
@@ -415,36 +415,5 @@ MyFuncRandomNameSampleExporterShortcut(*) {
 
         Sleep 500
         Send "{Enter}"
-    }
-}
-
-MyFuncGetPluginListShortcut(*) {
-    if (!GetPluginList)
-        return
-
-    folder := DirSelect(,, "Select a folder to scan for plugins:")
-    
-    if (folder = "")
-        return
-
-    pluginList := ""
-    exts := "i)^(dll|vst3|aaxplugin|clap)$"
-
-    Loop Files folder "\*.*", "R" {
-        if RegExMatch(A_LoopFileExt, exts) {
-            SplitPath A_LoopFileName, , , , &nameNoExt
-            pluginList .= nameNoExt "`n"
-        }
-    }
-
-    if (pluginList != "") {
-        outText := "Source Directory: " folder "`n--------------------------------------------------`n`n" pluginList
-        timestmp := FormatTime(, "yyyy-MM-dd_HH-mm-ss")
-        outFile := A_ScriptDir "\mypluglist_" timestmp ".txt"
-        
-        FileAppend outText, outFile, "UTF-8"
-        Run '"' outFile '"'
-    } else {
-        MsgBox "No plugins found in the selected directory.", "Scan Complete", "Iconi"
     }
 }

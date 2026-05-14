@@ -93,8 +93,3 @@ RandomNameSampleExporter := false
     RandomNameLength := 6
 RandomNameChangeIntoDatetime := true    ;; or use timestamp-based naming
     DatetimeFormat := "yyMMdd_HHmmss"
-
-; Generate audio plugin list from specified directory
-; Save that plugin mess before migrating to a new PC!
-GetPluginList := false
-    GetPluginListShortcut := "^+!p"

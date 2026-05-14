@@ -3,7 +3,7 @@
 RegisterHotkeys()
 {
     HotIf(IsAbletonActive)
-    
+
     SafeRegister(keyVar, funcObj) {
         if (keyVar != "") {
             Hotkey keyVar, funcObj
@@ -30,7 +30,6 @@ RegisterHotkeys()
     SafeRegister(MidiOctaveDn, MyFuncMidiOctaveDn)
     SafeRegister(LoopSwitch, MyFuncLoopSwitch)
     SafeRegister(RandomNameSampleExporterShortcut, MyFuncRandomNameSampleExporterShortcut)
-    
+
     HotIfWinActive
-    SafeRegister(GetPluginListShortcut, MyFuncGetPluginListShortcut)
 }
