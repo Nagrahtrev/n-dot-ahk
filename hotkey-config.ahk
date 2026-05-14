@@ -6,7 +6,7 @@
 ; -------------------------------------------------------------------------------
 
 ; Show custom plugin pop-up menu
-ShowPluginPopupMenu := "MButton"
+ShowPluginPopupMenu := ""
 
 ; Close active VST plugin window
 CloseVstWindow := "~Esc"
@@ -80,7 +80,7 @@ NoteSplitOpt := true
 
 ; Left-hand deletion
 ; Double-tap the [~] key
-LeftHandDelete := true
+LeftHandDelete := false
 
 ; Auto-switch to English(US) IME when Live is active
 AutoEnglishIme := true
@@ -88,13 +88,13 @@ AutoEnglishIme := true
 ; Quick export audio with randomized names
 ; Note: Select a time range before exporting.
 ; Note: Manually export once first to set the default save path.
-RandomNameSampleExporter := true
+RandomNameSampleExporter := false
     RandomNameSampleExporterShortcut := "!s"
     RandomNameLength := 6
-RandomNameChangeIntoDatetime := false    ;; or use timestamp-based naming
+RandomNameChangeIntoDatetime := true    ;; or use timestamp-based naming
     DatetimeFormat := "yyMMdd_HHmmss"
 
 ; Generate audio plugin list from specified directory
 ; Save that plugin mess before migrating to a new PC!
-GetPluginList := true
+GetPluginList := false
     GetPluginListShortcut := "^+!p"

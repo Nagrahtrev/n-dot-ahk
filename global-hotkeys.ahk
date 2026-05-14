@@ -30,7 +30,7 @@ if (!EnableCapsToggle) {
 
 *CapsLock Up:: {
     static lstRelease := 0
-    
+
     if (EnableCapsToggle) {
         if (A_PriorKey = "CapsLock" && A_TickCount - lstRelease < 250) {
             SetCapsLockState !GetKeyState("CapsLock", "T")
@@ -44,7 +44,6 @@ if (!EnableCapsToggle) {
 
 #HotIf GetKeyState("CapsLock", "P")
 
-w::Send "{F24}"    ;; Promotroid
 d::Send "#d"
 s::Send "{F23}"    ;; PixPin, take screenshots
 t::Send "^#t"    ;; PowerToys, always on top
@@ -54,15 +53,15 @@ k::Run "C:\Program Files\KeePass\KeePass.exe"
 b::Run "powercfg.cpl"
 n::Run "C:\Program Files\Notepad3\Notepad3.exe"
 m::Run "G:\AutoHotkey\_tmp\Outlook (new).lnk"
-Left::Media_Prev
-Right::Media_Next
-Up::Volume_Up
-Down::Volume_Down
-Space::Media_Play_Pause
+Left::Send "{Media_Prev}"
+Right::Send "{Media_Next}"
+Up::Send "{Volume_Up}"
+Down::Send "{Volume_Down}"
+Space::Send "{Media_Play_Pause}"
 Home::Run "G:\000_Gadgets\MultiMonitorTool\Toggle-Primary-Monitor.bat"
 End::Run "G:\000_Gadgets\MultiMonitorTool\Toggle-Secondary-Monitor.bat"
 
-q:: {    ;; Sonarworks 
+q:: {    ;; Sonarworks
     RunOrActivate("C:\Program Files\Sonarworks\SoundID Reference\Systemwide\SoundID Reference.exe", "ahk_exe SoundID Reference.exe")
     Send "{Space}"
     Sleep 100

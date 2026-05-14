@@ -8,7 +8,9 @@ outText := A_ScriptDir "\folder-list.txt"
 folderData := ""
 
 Loop Files, selectedDir "\*", "D" {
-    folderData .= A_LoopFileName "`n"
+    Loop Files, A_LoopFilePath "\*", "D" {
+        folderData .= A_LoopFileName "`n"
+    }
 }
 
 if (folderData != "") {
@@ -19,5 +21,5 @@ if (folderData != "") {
 
     Run outText
 } else {
-    MsgBox "No subfolders found in:`n" selectedDir, "Scan Result", "Iconi"
+    MsgBox "No subfolders found at the second level in:`n" selectedDir, "Scan Result", "Iconi"
 }
