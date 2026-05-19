@@ -72,6 +72,58 @@ e::RunOrActivate("C:\Program Files\OneCommander\OneCommander.exe", "ahk_exe OneC
 c::RunOrActivate("C:\Program Files\Google\Chrome\Application\chrome.exe", "ahk_exe chrome.exe")
 f::RunOrActivate("C:\Program Files\Everything\Everything.exe", "ahk_exe Everything.exe")
 
+w:: {
+    targetHwnd := WinExist("A")
+    if !targetHwnd {
+        return
+    }
+
+    winClass := WinGetClass(targetHwnd)
+    if (winClass = "WorkerW" || winClass = "Shell_TrayWnd" || winClass = "Progman") {
+        return
+    }
+
+    CoordMode("Mouse", "Screen")
+    MouseGetPos(&mouseX, &mouseY)
+
+    monitorCount := MonitorGetCount()
+    targetMonitor := 1
+
+    Loop monitorCount {
+        MonitorGet(A_Index, &Left, &Top, &Right, &Bottom)
+        if (mouseX >= Left && mouseX <= Right && mouseY >= Top && mouseY <= Bottom) {
+            targetMonitor := A_Index
+            break
+        }
+    }
+
+    MonitorGetWorkArea(targetMonitor, &WL, &WT, &WR, &WB)
+    WinGetPos(,, &winW, &winH, targetHwnd)
+
+    minMax := WinGetMinMax(targetHwnd)
+    if (minMax = 1) {
+        WinRestore(targetHwnd)
+        WinGetPos(,, &winW, &winH, targetHwnd)
+    }
+
+    newX := WL + (WR - WL - winW) / 2
+    newY := WT + (WB - WT - winH) / 2
+
+    if (newY < WT) {
+        newY := WT
+    }
+
+    if (newX < WL) {
+        newX := WL
+    }
+
+    WinMove(newX, newY,,, targetHwnd)
+
+    if (minMax = 1) {
+        WinMaximize(targetHwnd)
+    }
+}
+
 #HotIf
 
 ; -------------------------------------------------------------------------------
