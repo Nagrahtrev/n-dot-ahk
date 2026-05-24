@@ -11,12 +11,12 @@ HideQQ() {
 }
 
 ;; Open VPN
-Run "C:\Program Files (x86)\yytclient\yytclient.exe"
+Run "C:\Program Files (x86)\fbclient\fbclient.exe"
 SetTimer HideVPN, 50
 SetTimer ExitScript, 15000
 HideVPN() {
     DetectHiddenWindows False
-    if WinExist("ahk_class FLUTTER_RUNNER_yytclient ahk_exe yytclient.exe") {
+    if WinExist("ahk_class FLUTTER_RUNNER_fbclient ahk_exe fbclient.exe") {
         WinHide()
     }
 }
