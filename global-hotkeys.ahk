@@ -7,7 +7,7 @@ RShift & F12::Suspend
 
 SetNumLockState "AlwaysOn"
 
-^#!NumpadSub:: {
+^#!+NumpadSub:: {
     Send "{LCtrl Up}{RCtrl Up}{LAlt Up}{RAlt Up}{LShift Up}{RShift Up}{LWin Up}{RWin Up}{CapsLock Up}"
     SoundBeep(1000, 150)
     SoundBeep(2000, 300)
@@ -63,8 +63,9 @@ End::Run "G:\000_Gadgets\MultiMonitorTool\Toggle-Secondary-Monitor.bat"
 
 q:: {    ;; Sonarworks
     RunOrActivate("C:\Program Files\Sonarworks\SoundID Reference\Systemwide\SoundID Reference.exe", "ahk_exe SoundID Reference.exe")
+    Sleep 300
     Send "{Space}"
-    Sleep 100
+    Sleep 200
     WinHide("ahk_exe SoundID Reference.exe")
 }
 

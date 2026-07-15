@@ -311,7 +311,7 @@ MyFuncNewLaneAutomation(*) {
 MyFuncAssignTrackColor(*) {
     Send "{RButton}"
     Sleep 10
-    Send "{Up 3}"
+    Send "{Up 2}"
     Send "{Enter}"
 }
 

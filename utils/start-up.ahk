@@ -11,12 +11,12 @@ HideQQ() {
 }
 
 ;; Open VPN
-Run "C:\Program Files (x86)\fbclient\fbclient.exe"
+Run "C:\Program Files (x86)\FlyingBird\FlyingBird.exe"
 SetTimer HideVPN, 50
 SetTimer ExitScript, 15000
 HideVPN() {
     DetectHiddenWindows False
-    if WinExist("ahk_class FLUTTER_RUNNER_fbclient ahk_exe fbclient.exe") {
+    if WinExist("ahk_class FLUTTER_RUNNER_WIN32_WINDOW ahk_exe FlyingBird.exe") {
         WinHide()
     }
 }
